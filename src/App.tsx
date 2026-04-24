@@ -31,7 +31,7 @@ function Layout() {
   function handleRuneToggle(enabled: boolean) {
     if (enabled) {
       setRuneConfig({ ...runeConfig, enabled: true })
-      setRuneModalOpen(true)
+      setTimeout(() => setRuneModalOpen(true), 0)
     } else {
       setRuneConfig({ ...runeConfig, enabled: false })
     }

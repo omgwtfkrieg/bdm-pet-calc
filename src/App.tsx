@@ -231,7 +231,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <RosterProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <Layout />
         </BrowserRouter>
       </RosterProvider>

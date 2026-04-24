@@ -1,73 +1,85 @@
-# React + TypeScript + Vite
+# 🐾 BDM Pet Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An unofficial fan-made pet management and team-building tool for **Black Desert Mobile**.
 
-Currently, two official plugins are available:
+🔗 **Live site:** https://omgwtfkrieg.github.io/bdm-pet-calc/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🧮 Pet Calc
+Calculate skill roll quality before adding a pet to your roster. Enter a pet's tier, special skill, and regular skills to get an instant live preview with quality grades (S / A / B / C / D), investment flags, reroll suggestions, and skin/fodder analysis — all without committing the pet to your collection.
 
-## Expanding the ESLint configuration
+### 🐾 My Pets
+Manage your full pet roster with:
+- **Skill quality badges** — normalized roll grades per skill and tier
+- **Skin / Fodder flags** — per pet type, identifies the best keeper and low-value duplicates
+- **Invest flags** — highlights mid-tier pets worth leveling (unique skills, best-in-roster, reroll candidates)
+- **Reroll suggestions** — identifies the single regular skill slot that, if replaced, could push a pet to S overall
+- **Mode recommendation chips** — shows which game modes each pet is relevant for
+- **Collector Mode** — toggles skin/fodder visibility for collection-focused players
+- **Import / Export / Share** — JSON export, JSON import, and shareable roster URL
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### ⚔️ Team Builder
+Suggests optimal 3-pet teams per game mode using roster-wide value analysis:
+- **Combat modes:** Leveling, Grinding/AFK, Boss Rush, World Boss, PVP
+- **Life skill modes:** Logging, Mining, Foraging, Fishing, Dark Energy, Knowledge
+- Primary skills fill all 3 slots; combo pets (primary + secondary) are preferred
+- Non-stacking skills (Field Item Drop Rate) are never double-stacked in a team
+- Save up to 5 custom team templates with editable names and manual slot overrides
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 💎 Rune of Companionship
+Apply your Rune of Companionship's level buff to all special skill calculations:
+- Supports all tiers from Normal to Chaos with enhancement levels
+- Rune-adjusted values shown inline on pet cards and used in team scoring
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Game Modes & Recommendation Logic
+
+| Mode | Primary Skill | Combo Bonus |
+|---|---|---|
+| Leveling | Field Combat EXP | AP, DP, Monster DMG |
+| Grinding / AFK | Field Item Drop Rate · AP · DP · Monster DMG | Field Combat EXP |
+| Boss Rush | Extra Damage to Bosses | AP, DP, Crit DMG, Crit Rate, Max HP, Branch DMG |
+| World Boss | Extra Damage to World Bosses | AP, DP, Crit DMG, Crit Rate, Max HP, Branch DMG |
+| PVP | Damage to Adventurers · Decrease Damage from Adventurers | AP, DP, Crit DMG, Crit Rate, Max HP, Branch DMG |
+| Knowledge | Knowledge Acquire Rate | AP, DP, Field Combat EXP, Monster DMG |
+| Life Skills | Respective EXP skill | — |
+
+Recommendations rank pets by **absolute skill value** (not roll quality tier), with rune level buff applied. Combo pets (primary + secondary skills) receive a preference bonus in team suggestions.
+
+---
+
+## Disclaimer
+
+This is an **unofficial fan-made tool** not affiliated with, endorsed by, or connected to Pearl Abyss. Skill formulas and game mechanics are based on community research and may not always reflect the latest game updates.
+
+**Use at your own risk.** Recommendations are data-driven suggestions — always use your own judgment before sacrificing or modifying pets.
+
+---
+
+## Feedback & Bug Reports
+
+Found a bug or have a suggestion? [Submit feedback here](https://docs.google.com/forms/d/e/1FAIpQLSdaGYx2qQIfWOfWBae9BWxEbXdJI_1_yPFCEk76ivC23IysEA/viewform?usp=publish-editor)
+
+---
+
+## Tech Stack
+
+- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [MUI (Material UI v6)](https://mui.com/)
+- Deployed via [GitHub Pages](https://pages.github.com/) with GitHub Actions
+
+## Running Locally
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Support
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+If this tool has been useful, consider buying me a taco ☕ [ko-fi.com/P5P51Y54CP](https://ko-fi.com/P5P51Y54CP)

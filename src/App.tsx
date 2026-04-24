@@ -17,7 +17,6 @@ const NAV = [
 ]
 
 // A rune is "configured" if the user has moved away from the default Normal tier
-const isRuneConfigured = (tierName: string) => tierName !== 'Normal'
 
 function Layout() {
   const location = useLocation()

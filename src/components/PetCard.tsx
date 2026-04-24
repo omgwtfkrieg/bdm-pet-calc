@@ -17,7 +17,7 @@ import { TEAM_MODES } from '../data/teamModes'
 import { PetImage } from './PetImage'
 import { RollQualityBadge } from './RollQualityBadge'
 import type { RuneConfig } from '../utils/runeCalc'
-import { getEffectiveSkillLevel, getRuneLevelBonus } from '../utils/runeCalc'
+import { getEffectiveSkillLevel } from '../utils/runeCalc'
 import { RuneIcon } from './RuneIcon'
 
 function getSkillName(id: string): string {

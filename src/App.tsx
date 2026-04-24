@@ -187,7 +187,7 @@ function Layout() {
 
       {/* Mobile nav drawer */}
       <Drawer anchor="right" open={drawerOpen && isMobile} onClose={() => setDrawerOpen(false)}
-        PaperProps={{ sx: { width: 260, bgcolor: '#111114', borderLeft: '1px solid rgba(255,255,255,0.08)' } }}
+        slotProps={{ paper: { sx: { width: 260, bgcolor: '#111114', borderLeft: '1px solid rgba(255,255,255,0.08)' } } }}
       >
         <Box sx={{ pt: 2, pb: 1, px: 2 }}>
           <Typography variant="subtitle2" sx={{ fontWeight: 700, color: 'primary.main', letterSpacing: 1 }}>
@@ -203,7 +203,7 @@ function Layout() {
                 onClick={() => { navigate(n.path); setDrawerOpen(false) }}
                 sx={{ '&.Mui-selected': { bgcolor: 'rgba(201,168,76,0.12)', color: '#c9a84c' } }}
               >
-                <ListItemText primary={n.label} primaryTypographyProps={{ fontSize: 14, fontWeight: 600 }} />
+                <ListItemText primary={n.label} slotProps={{ primary: { style: { fontSize: 14, fontWeight: 600 } } }} />
               </ListItemButton>
             </ListItem>
           ))}

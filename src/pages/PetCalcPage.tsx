@@ -279,7 +279,7 @@ export function PetCalcPage() {
                   <Box key={key} component="li" {...optionProps} sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                     <Box
                       component="img"
-                      src={`/pets/${option}_Profile.png`}
+                      src={`${import.meta.env.BASE_URL}pets/${option}_Profile.png`}
                       alt={option}
                       sx={{ width: 32, height: 32, borderRadius: 1, objectFit: 'cover', flexShrink: 0 }}
                       onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
@@ -302,7 +302,7 @@ export function PetCalcPage() {
                       startAdornment: form.petType ? (
                         <Box
                           component="img"
-                          src={`/pets/${form.petType}_Profile.png`}
+                          src={`${import.meta.env.BASE_URL}pets/${form.petType}_Profile.png`}
                           alt={form.petType}
                           sx={{ width: 24, height: 24, borderRadius: 0.5, objectFit: 'cover', mr: 0.5, flexShrink: 0 }}
                           onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}

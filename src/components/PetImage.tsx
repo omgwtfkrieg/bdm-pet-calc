@@ -10,7 +10,7 @@ interface Props {
 
 export function PetImage({ petType, size = 72, tierColor }: Props) {
   const [failed, setFailed] = useState(false)
-  const src = `/pets/${petType}_Profile.png`
+  const src = `${import.meta.env.BASE_URL}pets/${petType}_Profile.png`
 
   useEffect(() => { setFailed(false) }, [petType])
 

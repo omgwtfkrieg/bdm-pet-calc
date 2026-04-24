@@ -49,7 +49,7 @@ function Layout() {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mr: 4 }}>
             <Box
               component="img"
-              src="/favicon.svg"
+              src={`${import.meta.env.BASE_URL}favicon.svg`}
               alt="BDM Pet Calculator"
               sx={{ width: 28, height: 28, flexShrink: 0 }}
             />

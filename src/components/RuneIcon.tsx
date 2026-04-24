@@ -36,7 +36,7 @@ export function RuneIcon({ tierName, enhancement = 0, size = 48 }: Props) {
         {/* Rune image */}
         <Box
           component="img"
-          src="/rune-companionship.svg"
+          src={`${import.meta.env.BASE_URL}rune-companionship.svg`}
           sx={{
             width: '100%',
             height: '100%',

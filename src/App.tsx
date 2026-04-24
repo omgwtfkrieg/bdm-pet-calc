@@ -32,7 +32,7 @@ function Layout() {
   function handleRuneToggle(enabled: boolean) {
     if (enabled) {
       setRuneConfig({ ...runeConfig, enabled: true })
-      if (!isRuneConfigured(runeConfig.tierName)) setRuneModalOpen(true)
+      setRuneModalOpen(true)
     } else {
       setRuneConfig({ ...runeConfig, enabled: false })
     }

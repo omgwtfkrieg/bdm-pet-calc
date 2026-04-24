@@ -41,8 +41,8 @@ export function RuneSettingsModal({ open, onClose, runeConfig, onChange, onDisab
               <Tooltip key={tier.name} title={
                 <Box>
                   <Typography variant="caption" sx={{ fontWeight: 700 }}>{tier.name}</Typography>
-                  <Typography variant="caption" display="block">Primary: +{tier.bonus} skill levels</Typography>
-                  {tier.canEnhance && <Typography variant="caption" display="block">Max enhancement: +{tier.maxEnhancement}</Typography>}
+                  <Typography variant="caption" sx={{ display: 'block' }}>Primary: +{tier.bonus} skill levels</Typography>
+                  {tier.canEnhance && <Typography variant="caption" sx={{ display: 'block' }}>Max enhancement: +{tier.maxEnhancement}</Typography>}
                 </Box>
               }>
                 <Box

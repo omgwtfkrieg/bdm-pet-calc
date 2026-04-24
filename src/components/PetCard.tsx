@@ -217,9 +217,6 @@ export function PetCard({ pet, onEdit, onDelete, petFlag = null, investFlag = nu
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.25 }}>
         {allEntries.map(({ entry, isSpecial }, i) => {
           const runeActive = isSpecial && !!runeConfig?.enabled
-          const { primary: runePrimary, secondary: runeSecondary } = runeActive
-            ? getRuneLevelBonus(runeConfig!)
-            : { primary: 0, secondary: 0 }
           const { effectivePrimary, effectiveSecondary } = runeActive
             ? getEffectiveSkillLevel(entry.level, runeConfig!)
             : { effectivePrimary: entry.level, effectiveSecondary: entry.level }

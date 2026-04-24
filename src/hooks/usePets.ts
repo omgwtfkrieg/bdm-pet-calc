@@ -4,7 +4,7 @@ import type { Pet } from '../types'
 const STORAGE_KEY = 'bdm_pets_v1'
 
 function uuid(): string {
-  if (typeof crypto !== 'undefined' && crypto.randomUUID) return uuid()
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID()
   // Fallback for non-secure contexts (plain HTTP on LAN)
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
     const r = Math.random() * 16 | 0

@@ -16,7 +16,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import ContentCutIcon from '@mui/icons-material/ContentCut'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import { TIER_CONFIG, TIERS } from '../data/tiers'
-import { specialSkills, regularSkills, exclusiveSkills, allSkills, primarySpecialSkills } from '../data/useSkills'
+import { specialSkills, regularSkills, allSkills, primarySpecialSkills } from '../data/useSkills'
 import { getSkillRange, formatRange } from '../utils/skillLevels'
 import { encodePets, decodePets } from '../utils/shareEncoder'
 import { computePetFlags, computeInvestFlags, getRerollSuggestion, getPetQuality, TIER_RANK } from '../utils/teamScoring'
@@ -43,9 +43,6 @@ function gradeLabel(q: number): string {
   return 'D'
 }
 
-function petScore(pet: Pet): number {
-  return (TIER_RANK[pet.tier] ?? 0) * 100 + (getPetQuality(pet) ?? 0) * 10
-}
 
 // ---- Form state ----
 
@@ -207,7 +204,7 @@ const GRADE_ORDER: Record<string, number> = { S: 5, A: 4, B: 3, C: 2, D: 1 }
 
 export function MyPetsPage() {
   const {
-    pets, templates,
+    pets,
     petFlags, investFlags, petRecommendations, rerollSuggestions, petTemplateMap,
     addPet, addPets, updatePet, deletePet, exportJSON, importJSON,
     runeConfig, collectorMode,

@@ -73,7 +73,7 @@ function getSecondaryIncrement(skillId: string): number {
 // Returns null if the tier/level threshold isn't met or no pairing is defined.
 export function getSpecialSkillSecondary(
   primarySkillId: string,
-  tier: string,
+  _tier: string,
   level: number,
   effectiveLevel?: number,
 ): { skillId: string; value: number; unit: SkillUnit } | null {

@@ -70,7 +70,7 @@ function validateForm(f: FormState): string | null {
 
 interface SkillRowProps {
   label: string
-  skills: typeof specialSkills
+  skills: typeof regularSkills
   entry: SkillFormEntry
   maxLv: number
   excludeIds?: string[]

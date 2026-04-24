@@ -1,0 +1,190 @@
+{
+  "special": [
+    {
+      "id": "sp_ap",
+      "name": "AP (Attack Power)",
+      "description": "Increases Attack Power",
+      "category": "combat",
+      "icon": "⚔️",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 9, "afk": 6, "pvp": 9, "boss": 8, "progression": 8 }
+    },
+    {
+      "id": "sp_dp",
+      "name": "DP (Defense Power)",
+      "description": "Increases Defense Power",
+      "category": "combat",
+      "icon": "🛡️",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 5, "afk": 6, "pvp": 8, "boss": 6, "progression": 5 }
+    },
+    {
+      "id": "sp_max_hp",
+      "name": "Max HP",
+      "description": "Increases Maximum HP",
+      "category": "survival",
+      "icon": "❤️",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 4, "afk": 5, "pvp": 6, "boss": 5, "progression": 4 }
+    },
+    {
+      "id": "sp_boss_dmg",
+      "name": "Extra Damage to Bosses",
+      "description": "Increases damage dealt to bosses (excluding World Bosses)",
+      "category": "combat",
+      "icon": "👹",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 3, "afk": 3, "pvp": 2, "boss": 10, "progression": 6 }
+    },
+    {
+      "id": "sp_world_boss_dmg",
+      "name": "Extra Damage to World Bosses",
+      "description": "Increases damage dealt to World Bosses",
+      "category": "combat",
+      "icon": "🌍",
+      "secondaryOnly": true,
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 2, "afk": 2, "pvp": 2, "boss": 8, "progression": 5 }
+    },
+    {
+      "id": "sp_crit_dmg",
+      "name": "Critical Hit Damage",
+      "description": "Increases damage dealt on Critical Hits",
+      "category": "combat",
+      "icon": "💥",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 8, "afk": 5, "pvp": 8, "boss": 8, "progression": 7 }
+    },
+    {
+      "id": "sp_crit_rate",
+      "name": "Critical Hit Rate",
+      "description": "Increases Critical Hit Rate",
+      "category": "combat",
+      "icon": "🎯",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 7, "afk": 5, "pvp": 8, "boss": 7, "progression": 6 }
+    },
+    {
+      "id": "sp_branch_dmg",
+      "name": "All Branch Damage",
+      "description": "Increases damage across all combat branches",
+      "category": "combat",
+      "icon": "🌿",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 7, "afk": 6, "pvp": 7, "boss": 7, "progression": 7 }
+    },
+    {
+      "id": "sp_pvp_dmg",
+      "name": "Damage to Adventurers",
+      "description": "Increases damage dealt to other players (PvP)",
+      "category": "pvp",
+      "icon": "🏹",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 1, "afk": 1, "pvp": 10, "boss": 1, "progression": 3 }
+    },
+    {
+      "id": "sp_pvp_def",
+      "name": "Decrease Damage from Adventurers",
+      "description": "Decreases damage received from other players (PvP)",
+      "category": "pvp",
+      "icon": "🛡️",
+      "secondaryOnly": true,
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 1, "afk": 1, "pvp": 8, "boss": 1, "progression": 2 }
+    },
+    {
+      "id": "sp_monster_dmg",
+      "name": "Extra Damage to Normal Monsters",
+      "description": "Increases damage dealt to regular monsters",
+      "category": "combat",
+      "icon": "🗡️",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 9, "afk": 7, "pvp": 1, "boss": 3, "progression": 7 }
+    }
+  ],
+  "regular": [
+    {
+      "id": "field_combat_exp",
+      "name": "Field Combat EXP",
+      "description": "Increases Combat EXP gained from field monsters",
+      "category": "progression",
+      "icon": "⚔️",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 9, "afk": 9, "pvp": 2, "boss": 5, "progression": 10 }
+    },
+    {
+      "id": "logging_exp",
+      "name": "Logging EXP",
+      "description": "Increases EXP gained from Logging",
+      "category": "lifeskill",
+      "icon": "🪵",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 1, "afk": 4, "pvp": 1, "boss": 1, "progression": 5 }
+    },
+    {
+      "id": "foraging_exp",
+      "name": "Foraging EXP",
+      "description": "Increases EXP gained from Foraging",
+      "category": "lifeskill",
+      "icon": "🌾",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 1, "afk": 4, "pvp": 1, "boss": 1, "progression": 5 }
+    },
+    {
+      "id": "mining_exp",
+      "name": "Mining EXP",
+      "description": "Increases EXP gained from Mining",
+      "category": "lifeskill",
+      "icon": "⛏️",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 1, "afk": 4, "pvp": 1, "boss": 1, "progression": 5 }
+    },
+    {
+      "id": "fishing_exp",
+      "name": "Fishing EXP",
+      "description": "Increases EXP gained from Fishing",
+      "category": "lifeskill",
+      "icon": "🎣",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 1, "afk": 3, "pvp": 1, "boss": 1, "progression": 4 }
+    },
+    {
+      "id": "knowledge_rate",
+      "name": "Knowledge Acquire Rate",
+      "description": "Increases the rate at which Knowledge is acquired",
+      "category": "progression",
+      "icon": "📖",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 5, "afk": 5, "pvp": 2, "boss": 3, "progression": 7 }
+    },
+    {
+      "id": "dark_energy_exp",
+      "name": "Dark Energy EXP",
+      "description": "Increases Dark Energy EXP gained",
+      "category": "progression",
+      "icon": "🌑",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 6, "afk": 6, "pvp": 1, "boss": 3, "progression": 8 }
+    },
+    {
+      "id": "inventory",
+      "name": "Inventory",
+      "description": "Increases inventory capacity",
+      "category": "utility",
+      "icon": "🎒",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 6, "afk": 8, "pvp": 3, "boss": 4, "progression": 7 }
+    }
+  ],
+  "exclusive": [
+    {
+      "id": "ex_field_drop_rate",
+      "name": "Field Item Drop Rate",
+      "description": "Increases field item drop rate. Exclusive to Lucky Black Dragon — always BiS, no roll variance.",
+      "category": "utility",
+      "icon": "🍀",
+      "levels": ["Lv1", "Lv2", "Lv3", "Lv4", "Lv5"],
+      "scores": { "pve": 7, "afk": 10, "pvp": 1, "boss": 3, "progression": 9 }
+    }
+  ]
+}

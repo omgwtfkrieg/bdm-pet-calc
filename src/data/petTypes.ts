@@ -1,0 +1,17 @@
+export const PET_TYPES = [
+  'Baby_Kabua', 'Black_Bear', 'Black_Carmadun_Owl', 'Black-Caped_Cat',
+  'Black-Caped_Puppy', 'Black_Cloak_Kitten', 'Black_Shaggy_Dog', 'Bosn_Jack',
+  'Brown_Cat', 'Brown_Guide_Hawk', 'Choppy', 'Crow', 'Cursed_Looney',
+  'Cushy_Mallowmerz', 'Dark_Red_Macaw', 'Desert_Fox', 'Fierce_White_Dragon',
+  'Fluffy', 'Helter-Skelter_Ceros', 'Heuklang_Jr', 'Junaid_Cat',
+  'Kunid_Dobermann', 'Long-Tailed_Rosefinch', 'Lost_Penguin', 'Lucky_Black_Dragon',
+  'Mischievous_Dog', 'Newborn_Crimson_Dragon', 'Otter', 'Panda', 'Parrot',
+  'Pocket_Watch_Choppy', 'Polar_Bear', 'Red_Panda', 'Red-Ribboned_Cat',
+  'Rudolf_Fox', 'Santa_Fox', 'Shepherd', 'Shudads_Courier', 'Skinny_Black_Cat',
+  'Sky_Hawk', 'Skyward_Penguin', 'Snowball_Rosefinch', 'Snowflake_Rosefinch',
+  'Snowkid', 'Snow_Wolfdog', 'Starry_Night_Tiger', 'Stoneback_Crab',
+  'Sunshine_Tiger', 'Terrmian_Anemone_Crab', 'Terrmian_Armored_Lady_Crab',
+  'Terrmian_Spiny_Turtle', 'Turtle', 'Wandering_Gosphy', 'White_Valencian_Cat',
+  'Witch_Hat_Charlotte', 'Wizard_Gosphy', 'Young_Bapit', 'Young_Blue_Dragon',
+  'Young_Crimson_Dragon', 'Young_Golden_Dragon', 'Hedgehog',
+]

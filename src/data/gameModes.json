@@ -1,0 +1,42 @@
+[
+  {
+    "id": "pve",
+    "name": "PvE Grinding",
+    "description": "Solo or party grinding spots for EXP and silver",
+    "icon": "⚔️",
+    "color": "#e53935",
+    "topSkills": ["sp_monster_dmg", "sp_ap", "field_combat_exp", "sp_drop_rate", "sp_crit_dmg"]
+  },
+  {
+    "id": "afk",
+    "name": "AFK Farming",
+    "description": "Auto-battle while away — maximise passive gains",
+    "icon": "💤",
+    "color": "#7b1fa2",
+    "topSkills": ["sp_drop_rate", "field_combat_exp", "inventory", "dark_energy_exp", "knowledge_rate"]
+  },
+  {
+    "id": "pvp",
+    "name": "PvP",
+    "description": "Node Wars, Arena, and open-world PvP",
+    "icon": "🏹",
+    "color": "#c62828",
+    "topSkills": ["sp_pvp_dmg", "sp_ap", "sp_crit_dmg", "sp_crit_rate", "sp_dp"]
+  },
+  {
+    "id": "boss",
+    "name": "Boss Rush",
+    "description": "World bosses and boss rush stages",
+    "icon": "👹",
+    "color": "#e65100",
+    "topSkills": ["sp_boss_dmg", "sp_ap", "sp_crit_dmg", "sp_crit_rate", "sp_monster_dmg"]
+  },
+  {
+    "id": "progression",
+    "name": "Progression",
+    "description": "General character growth — EXP, upgrades, and power",
+    "icon": "📈",
+    "color": "#1565c0",
+    "topSkills": ["field_combat_exp", "dark_energy_exp", "knowledge_rate", "sp_ap", "inventory"]
+  }
+]

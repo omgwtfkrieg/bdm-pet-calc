@@ -1,7 +1,14 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route, NavLink, useLocation, Navigate } from 'react-router-dom'
-import { ThemeProvider, CssBaseline, Box, AppBar, Toolbar, Typography, Tabs, Tab, Container, LinearProgress, Fade, Button, Tooltip, FormControlLabel, Switch, IconButton, Dialog, DialogTitle, DialogContent, DialogActions, Collapse, Alert } from '@mui/material'
+import { BrowserRouter, Routes, Route, NavLink, useLocation, Navigate, useNavigate } from 'react-router-dom'
+import {
+  ThemeProvider, CssBaseline, Box, AppBar, Toolbar, Typography, Tabs, Tab,
+  Container, LinearProgress, Fade, Button, Tooltip, FormControlLabel, Switch,
+  IconButton, Dialog, DialogTitle, DialogContent, DialogActions, Collapse, Alert,
+  Drawer, List, ListItem, ListItemButton, ListItemText, Divider, useMediaQuery,
+} from '@mui/material'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
+import MenuIcon from '@mui/icons-material/Menu'
+import { useTheme } from '@mui/material/styles'
 import { theme } from './theme'
 import { MyPetsPage } from './pages/MyPetsPage'
 import { TeamBuilderPage } from './pages/TeamBuilderPage'
@@ -16,15 +23,18 @@ const NAV = [
   { label: '⚔️ Team Builder', path: '/team-builder' },
 ]
 
-// A rune is "configured" if the user has moved away from the default Normal tier
-
 function Layout() {
   const location = useLocation()
+  const navigate = useNavigate()
   const tabIndex = Math.max(0, NAV.findIndex(n => n.path === location.pathname))
   const { isComputing, runeConfig, collectorMode, setRuneConfig, setCollectorMode } = useRoster()
   const [runeModalOpen, setRuneModalOpen] = useState(false)
   const [infoOpen, setInfoOpen] = useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false)
   const [bannerVisible, setBannerVisible] = useState(() => localStorage.getItem('bdm_disclaimer_seen') !== '1')
+
+  const muiTheme = useTheme()
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'))
 
   const activeTier = RUNE_TIERS.find(t => t.name === runeConfig.tierName)
 
@@ -37,6 +47,54 @@ function Layout() {
     }
   }
 
+  const runeLabel = runeConfig.enabled
+    ? `${runeConfig.tierName}${runeConfig.enhancement > 0 ? ` +${runeConfig.enhancement}` : ''}`
+    : 'Rune'
+
+  // Shared toggles used in both desktop AppBar and mobile Drawer
+  const CollectorToggle = (
+    <FormControlLabel
+      control={
+        <Switch
+          checked={collectorMode}
+          onChange={e => setCollectorMode(e.target.checked)}
+          size="small"
+          sx={{
+            '& .MuiSwitch-switchBase.Mui-checked': { color: '#ab47bc' },
+            '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': { bgcolor: '#ab47bc' },
+          }}
+        />
+      }
+      label={<Typography sx={{ fontSize: 12, fontWeight: 600, color: collectorMode ? '#ab47bc' : 'text.disabled' }}>Collector</Typography>}
+      sx={{ mx: 0 }}
+    />
+  )
+
+  const RuneToggle = (
+    <FormControlLabel
+      control={
+        <Switch
+          checked={runeConfig.enabled}
+          onChange={e => handleRuneToggle(e.target.checked)}
+          size="small"
+          sx={{
+            '& .MuiSwitch-switchBase.Mui-checked': { color: activeTier?.color ?? '#26c6da' },
+            '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': { bgcolor: activeTier?.color ?? '#26c6da' },
+          }}
+        />
+      }
+      label={
+        <Typography
+          sx={{ fontSize: 12, fontWeight: 600, color: runeConfig.enabled ? activeTier?.color : 'text.disabled', cursor: runeConfig.enabled ? 'pointer' : 'default', '&:hover': runeConfig.enabled ? { textDecoration: 'underline' } : {} }}
+          onClick={runeConfig.enabled ? e => { e.preventDefault(); setRuneModalOpen(true) } : undefined}
+        >
+          {runeLabel}
+        </Typography>
+      }
+      sx={{ mx: 0 }}
+    />
+  )
+
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
       <AppBar position="sticky" elevation={0} sx={{
@@ -44,8 +102,9 @@ function Layout() {
         backdropFilter: 'blur(12px)',
         borderBottom: '1px solid rgba(255,255,255,0.08)',
       }}>
-        <Toolbar>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mr: 4 }}>
+        <Toolbar sx={{ minHeight: { xs: 56, md: 64 } }}>
+          {/* Logo — always visible */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mr: { xs: 'auto', md: 4 } }}>
             <Box
               component="img"
               src={`${import.meta.env.BASE_URL}favicon.svg`}
@@ -55,76 +114,38 @@ function Layout() {
             <Typography variant="h6" sx={{ fontWeight: 800, color: 'primary.main', letterSpacing: 1 }}>
               BDM
             </Typography>
-            <Typography variant="subtitle2" color="text.secondary">
+            <Typography variant="subtitle2" color="text.secondary" sx={{ display: { xs: 'none', sm: 'block' } }}>
               Pet Calculator
             </Typography>
           </Box>
+
+          {/* Desktop nav tabs */}
           <Tabs
             value={tabIndex}
             textColor="inherit"
             slotProps={{ indicator: { style: { backgroundColor: '#c9a84c' } } }}
+            sx={{ display: { xs: 'none', md: 'flex' } }}
           >
             {NAV.map(n => (
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              <Tab
-                key={n.path}
-                label={n.label}
-                component={NavLink as any}
-                to={n.path}
+              <Tab key={n.path} label={n.label} component={NavLink as any} to={n.path}
                 sx={{ fontWeight: 600, fontSize: 13, minWidth: 'auto', px: 2 }}
               />
             ))}
           </Tabs>
 
-          <Box sx={{ flex: 1 }} />
+          <Box sx={{ flex: 1, display: { xs: 'none', md: 'block' } }} />
 
-          {/* Collector Mode toggle */}
+          {/* Desktop controls */}
           <Tooltip title="Collector Mode — shows Unique Skin and Fodder flags on pet cards">
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={collectorMode}
-                  onChange={e => setCollectorMode(e.target.checked)}
-                  size="small"
-                  sx={{
-                    '& .MuiSwitch-switchBase.Mui-checked': { color: '#ab47bc' },
-                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': { bgcolor: '#ab47bc' },
-                  }}
-                />
-              }
-              label={<Typography sx={{ fontSize: 12, fontWeight: 600, color: collectorMode ? '#ab47bc' : 'text.disabled' }}>Collector</Typography>}
-              sx={{ mr: 2, ml: 0 }}
-            />
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>{CollectorToggle}</Box>
           </Tooltip>
 
-          {/* Rune toggle */}
-          <Tooltip title={
-            runeConfig.enabled
-              ? `Rune of Companionship active (${runeConfig.tierName}${runeConfig.enhancement > 0 ? ` +${runeConfig.enhancement}` : ''}) — click icon to configure`
-              : 'Rune of Companionship — apply your rune\'s level buff to special skill calculations'
+          <Tooltip title={runeConfig.enabled
+            ? `Rune active (${runeLabel}) — click label to configure`
+            : "Rune of Companionship — apply your rune's level buff to special skill calculations"
           }>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={runeConfig.enabled}
-                  onChange={e => handleRuneToggle(e.target.checked)}
-                  size="small"
-                  sx={{
-                    '& .MuiSwitch-switchBase.Mui-checked': { color: activeTier?.color ?? '#26c6da' },
-                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': { bgcolor: activeTier?.color ?? '#26c6da' },
-                  }}
-                />
-              }
-              label={
-                <Typography
-                  sx={{ fontSize: 12, fontWeight: 600, color: runeConfig.enabled ? activeTier?.color : 'text.disabled', cursor: runeConfig.enabled ? 'pointer' : 'default', '&:hover': runeConfig.enabled ? { textDecoration: 'underline' } : {} }}
-                  onClick={runeConfig.enabled ? e => { e.preventDefault(); setRuneModalOpen(true) } : undefined}
-                >
-                  {runeConfig.enabled ? `${runeConfig.tierName}${runeConfig.enhancement > 0 ? ` +${runeConfig.enhancement}` : ''}` : 'Rune'}
-                </Typography>
-              }
-              sx={{ mr: 2, ml: 0 }}
-            />
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>{RuneToggle}</Box>
           </Tooltip>
 
           <Tooltip title="About & Disclaimer">
@@ -140,28 +161,83 @@ function Layout() {
             variant="outlined"
             size="small"
             sx={{
-              borderColor: '#72a4f2',
-              color: '#72a4f2',
-              fontWeight: 700,
-              fontSize: 12,
-              textTransform: 'none',
-              whiteSpace: 'nowrap',
+              display: { xs: 'none', md: 'inline-flex' },
+              borderColor: '#72a4f2', color: '#72a4f2', fontWeight: 700, fontSize: 12,
+              textTransform: 'none', whiteSpace: 'nowrap',
               '&:hover': { borderColor: '#90b8ff', color: '#90b8ff', bgcolor: '#72a4f211' },
             }}
           >
             🌮 Buy me a taco
           </Button>
+
+          {/* Mobile hamburger */}
+          <IconButton
+            size="small"
+            onClick={() => setDrawerOpen(true)}
+            sx={{ display: { xs: 'flex', md: 'none' }, color: 'text.secondary' }}
+          >
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
+
         <Fade in={isComputing} unmountOnExit>
-          <LinearProgress
-            sx={{
-              height: 2,
-              bgcolor: 'transparent',
-              '& .MuiLinearProgress-bar': { bgcolor: '#c9a84c' },
-            }}
-          />
+          <LinearProgress sx={{ height: 2, bgcolor: 'transparent', '& .MuiLinearProgress-bar': { bgcolor: '#c9a84c' } }} />
         </Fade>
       </AppBar>
+
+      {/* Mobile nav drawer */}
+      <Drawer anchor="right" open={drawerOpen && isMobile} onClose={() => setDrawerOpen(false)}
+        PaperProps={{ sx: { width: 260, bgcolor: '#111114', borderLeft: '1px solid rgba(255,255,255,0.08)' } }}
+      >
+        <Box sx={{ pt: 2, pb: 1, px: 2 }}>
+          <Typography variant="subtitle2" sx={{ fontWeight: 700, color: 'primary.main', letterSpacing: 1 }}>
+            BDM Pet Calculator
+          </Typography>
+        </Box>
+        <Divider />
+        <List disablePadding>
+          {NAV.map(n => (
+            <ListItem key={n.path} disablePadding>
+              <ListItemButton
+                selected={location.pathname === n.path}
+                onClick={() => { navigate(n.path); setDrawerOpen(false) }}
+                sx={{ '&.Mui-selected': { bgcolor: 'rgba(201,168,76,0.12)', color: '#c9a84c' } }}
+              >
+                <ListItemText primary={n.label} primaryTypographyProps={{ fontSize: 14, fontWeight: 600 }} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <Box sx={{ px: 2, py: 1.5, display: 'flex', flexDirection: 'column', gap: 1 }}>
+          {CollectorToggle}
+          {RuneToggle}
+        </Box>
+        <Divider />
+        <Box sx={{ px: 2, py: 1.5, display: 'flex', flexDirection: 'column', gap: 1 }}>
+          <Button
+            href="https://ko-fi.com/P5P51Y54CP"
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="outlined"
+            size="small"
+            fullWidth
+            sx={{ borderColor: '#72a4f2', color: '#72a4f2', fontWeight: 700, fontSize: 12, textTransform: 'none' }}
+          >
+            🌮 Buy me a taco
+          </Button>
+          <Button
+            size="small"
+            variant="text"
+            fullWidth
+            startIcon={<InfoOutlinedIcon sx={{ fontSize: 16 }} />}
+            onClick={() => { setInfoOpen(true); setDrawerOpen(false) }}
+            sx={{ color: 'text.secondary', fontSize: 12, textTransform: 'none' }}
+          >
+            About & Disclaimer
+          </Button>
+        </Box>
+      </Drawer>
 
       <Collapse in={bannerVisible} unmountOnExit>
         <Alert
@@ -169,11 +245,11 @@ function Layout() {
           onClose={() => { setBannerVisible(false); localStorage.setItem('bdm_disclaimer_seen', '1') }}
           sx={{ borderRadius: 0, borderBottom: '1px solid', borderColor: 'divider', fontSize: 13 }}
         >
-          <strong>Unofficial fan tool — not affiliated with Pearl Abyss.</strong> Recommendations are data-driven suggestions only. Always use your own judgment before sacrificing or modifying pets — irreversible actions cannot be undone.
+          <strong>Unofficial fan tool — not affiliated with Pearl Abyss.</strong> Recommendations are data-driven suggestions only. Always use your own judgment before sacrificing or modifying pets.
         </Alert>
       </Collapse>
 
-      <Container maxWidth="xl" sx={{ py: 4 }}>
+      <Container maxWidth="xl" sx={{ py: { xs: 2, md: 4 }, px: { xs: 1.5, md: 3 } }}>
         <Routes>
           <Route path="/" element={<PetCalcPage />} />
           <Route path="/my-pets" element={<MyPetsPage />} />

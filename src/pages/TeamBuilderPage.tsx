@@ -274,11 +274,11 @@ export function TeamBuilderPage() {
 
         <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap', alignItems: 'flex-start' }}>
           {/* Suggested team */}
-          <Box sx={{ flex: 1, minWidth: 300 }}>
+          <Box sx={{ flex: 1, minWidth: { xs: '100%', sm: 300 } }}>
             <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 1.5 }}>
               {activeMode.description}
             </Typography>
-            <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, mb: 1 }}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' }, gap: 1, mb: 1 }}>
               {Array.from({ length: 3 }, (_, i) =>
                 suggestedTeam[i]
                   ? <PetMiniCard key={suggestedTeam[i].id} pet={suggestedTeam[i]} />
@@ -372,7 +372,7 @@ export function TeamBuilderPage() {
               <Divider sx={{ mb: 2 }} />
 
               {/* 3 pet slots */}
-              <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1.5 }}>
+              <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' }, gap: 1.5 }}>
                 {Array.from({ length: 3 }, (_, slot) => (
                   <Box key={slot}>
                     {templatePets[slot] && (

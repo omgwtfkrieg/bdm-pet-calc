@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>BDM Pet Calculator</title>
+    <script>
+      // SPA redirect for GitHub Pages.
+      // Encodes the full path into a query string and redirects to the base URL,
+      // where index.html will decode it and restore the correct URL via history.replaceState.
+      var base = '/bdm-pet-calc';
+      var l = window.location;
+      var path = l.pathname.slice(base.length).replace(/^\//, '');
+      l.replace(
+        l.protocol + '//' + l.host + base + '/?p=' +
+        encodeURIComponent(path) +
+        (l.search ? '&q=' + encodeURIComponent(l.search.slice(1)) : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>

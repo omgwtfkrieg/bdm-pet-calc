@@ -8,6 +8,20 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Decode the path encoded by 404.html and restore it via history.replaceState
+      // so React Router sees the correct URL on first load.
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var p = params.get('p');
+        if (p !== null) {
+          var base = '/bdm-pet-calc';
+          var q = params.get('q');
+          var url = base + '/' + p + (q ? '?' + q : '') + window.location.hash;
+          window.history.replaceState(null, '', url);
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
